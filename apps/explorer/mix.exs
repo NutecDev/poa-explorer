@@ -11,7 +11,7 @@ defmodule Explorer.Mixfile do
       deps_path: "../../deps",
       dialyzer: [
         plt_add_deps: :transitive,
-        plt_add_apps: [:mix],
+        plt_add_apps: ~w(ex_unit mix)a,
         ignore_warnings: "../../.dialyzer-ignore"
       ],
       elixir: "~> 1.6",
@@ -62,6 +62,10 @@ defmodule Explorer.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      # benchmark optimizations
+      {:benchee, "~> 0.13.1", only: :test},
+      # CSV output for benchee
+      {:benchee_csv, "~> 0.8.0", only: :test},
       {:bypass, "~> 0.8", only: :test},
       {:credo, "0.9.2", only: [:dev, :test], runtime: false},
       {:crontab, "~> 1.1"},
@@ -81,7 +85,7 @@ defmodule Explorer.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:scrivener_ecto, "~> 1.0"},
       {:scrivener_html, "~> 1.7"},
-      {:sobelow, ">= 0.0.0", only: [:dev, :test], runtime: false},
+      {:sobelow, ">= 0.7.0", only: [:dev, :test], runtime: false},
       {:timex, "~> 3.1.24"},
       {:timex_ecto, "~> 3.2.1"}
     ]

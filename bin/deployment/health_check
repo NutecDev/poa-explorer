@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-set -x
+set -e
 
 # Timeout after 2 min if we still haven't gotten a response
 timeout 120s bash <<EOT
 # Wait until an HTTP request succeeds against localhost:PORT
 function ping_server(){
     while true; do
-        if curl -sSf "http://localhost:${PORT:-80}" >/dev/null; then
+        if curl -sSf "http://localhost:4000" >/dev/null; then
             exit 0
         fi
     done

@@ -15,18 +15,10 @@ use Mix.Config
 # which you typically run after static files are built.
 config :explorer_web, ExplorerWeb.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json",
-  force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  instrumenters: [NewRelixir.Instrumenters.Phoenix],
-  load_from_system_env: true,
-  pubsub: [
-    adapter: Phoenix.PubSub.Redis,
-    url: System.get_env("REDIS_URL"),
-    node_name: System.get_env("DYNO")
-  ],
+  force_ssl: false,
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
+  http: [port: System.get_env("PORT")],
   url: [
-    scheme: "https",
-    # TODO update before prod push
-    host: "",
-    port: 443
+    scheme: "http",
+    port: System.get_env("PORT")
   ]
